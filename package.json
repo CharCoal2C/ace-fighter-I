@@ -1,0 +1,22 @@
+{
+  "name": "srvtest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npm run server & npm run prettier",
+    "prettier": "onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}",
+    "server": "http-server ./"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^14.0.0",
+    "prettier": "^2.4.1"
+  },
+  "dependencies": {
+    "onchange": "^7.1.0",
+    "phaser": "^3.55.2"
+  },
+  "keywords": [],
+  "description": ""
+}
