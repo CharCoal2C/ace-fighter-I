@@ -25,8 +25,6 @@ function preload() {
   this.load.image("finalBoss", "Graphics/R.VI.png");
 }
 
-alert("This is a test.");
-
 // In deze functie worden er pictures op het scherm gezet.
 function create() {
   // De achtergrond
