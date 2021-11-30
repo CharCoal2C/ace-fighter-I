@@ -23,7 +23,6 @@ var config = {
 var game = new Phaser.Game(config);
 
 var player;
-var obstacles;
 var cursors;
 
 var yLimit;
@@ -48,25 +47,28 @@ function create() {
 
   // De player
   player = this.physics.add.sprite(180, 270, "player");
-  player.setScale(0.4);
+  player.setScale(1);
 
   cursors = this.input.keyboard.createCursorKeys();
 
   this.cameras.main.setBounds(0, 0, xLimit, yLimit);
 }
+
+// Beweging links en rechts
 function update() {
   if (cursors.left.isDown && player.x >= 0) {
-    player.setVelocityX(-100);
+    player.setVelocityX(-125);
   } else if (cursors.right.isDown && player.x <= xLimit) {
-    player.setVelocityX(100);
+    player.setVelocityX(125);
   } else {
     player.setVelocityX(0);
   }
 
+  // Beweging op en neer
   if (cursors.up.isDown && player.y >= 0) {
-    player.setVelocityY(-100);
+    player.setVelocityY(-125);
   } else if (cursors.down.isDown && player.y <= yLimit) {
-    player.setVelocityY(100);
+    player.setVelocityY(125);
   } else {
     player.setVelocityY(0);
   }
