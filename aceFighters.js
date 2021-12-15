@@ -28,6 +28,7 @@ var cursors;
 var yLimit;
 var xLimit;
 
+var isDown = true;
 // Hier word alles van te voren geladen.
 function preload() {
   this.load.image("background", "Graphics/Background.png");
@@ -39,38 +40,25 @@ function preload() {
 // In deze functie worden er pictures op het scherm gezet.
 function create() {
   // De achtergrond
-  let background = this.add.image(0, 0, "background");
-  background.x = background.displayWidth / 2;
-  background.y = background.displayHeight / 2;
-  xLimit = background.displayWidth;
-  yLimit = background.displayHeight;
+  let background = this.add.image(0, 0, "background").setOrigin(0, 0);
 
   // De player
   player = this.physics.add.sprite(180, 270, "player");
   player.setScale(1);
+  player.body.colliderWorldBounds = true;
 
   cursors = this.input.keyboard.createCursorKeys();
 
   this.cameras.main.setBounds(0, 0, xLimit, yLimit);
 }
-// Beweging links en rechts
 function update() {
-  if (cursors.left.isDown && player.x >= 0) {
-    player.setVelocityX(-125);
-  } else if (cursors.right.isDown && player.x <= xLimit) {
-    player.setVelocityX(125);
-  } else {
-    player.setVelocityX(0);
+  //Player speed
+  if (cursors.left.isDown) {
+    player.angle += -1;
+    this.physics.velocityFromAngle(player.angle - 90, 70, player.body.velocity);
+  } else if (cursors.right.isDown) {
+    player.angle -= -1;
+    this.physics.velocityFromAngle(player.angle - 90, 70, player.body.velocity);
   }
-
-  // Beweging op en neer
-  if (cursors.up.isDown && player.y >= 0) {
-    player.setVelocityY(-125);
-  } else if (cursors.down.isDown && player.y <= yLimit) {
-    player.setVelocityY(125);
-  } else {
-    player.setVelocityY(0);
-  }
-
   this.cameras.main.centerOn(player.x, player.y);
 }
