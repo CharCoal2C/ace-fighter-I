@@ -23,9 +23,6 @@ var config = {
 var game = new Phaser.Game(config);
 
 var player;
-var lives = 3;
-var maxLives = 3;
-var livesCounter, livesIcon, livesCrop;
 var cursors;
 
 var yLimit;
@@ -33,7 +30,6 @@ var xLimit;
 
 // Hier word alles van te voren geladen.
 function preload() {
-  this.load.image("Lives", "Graphics/Lives.png");
   this.load.image("background", "Graphics/Background.png");
   this.load.image("player", "Graphics/Player_1.png");
 }
@@ -55,26 +51,6 @@ function create() {
 
   cursors = this.input.keyboard.createCursorKeys();
 
-  livesCounter = this.add.image(650, 20, "Lives");
-
-  livesCounter.fixedToCamera = true;
-
-  var livesLabel = this.add.text(585, 29, "Lives", {
-    fontSize: "20px",
-    fill: "ffffff",
-  });
-
-  livesIcon = livesCounter.width / maxLives;
-
-  livesCrop = new Phaser.Rectangle(
-    0,
-    0,
-    lives * livesIcon,
-    livesCounter.height
-  );
-
-  livesCounter.crop(livesCrop);
-
   this.cameras.main.setBounds(0, 0, xLimit, yLimit);
 }
 // Beweging links en rechts
@@ -95,10 +71,6 @@ function update() {
   } else {
     player.setVelocityY(0);
   }
-
-  livesCrop.width = lives * livesIcon;
-
-  livesCounter.updateCrop();
 
   this.cameras.main.centerOn(player.x, player.y);
 }
